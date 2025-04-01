@@ -2,57 +2,163 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Recommender System</title>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<style>
-    .text-white{
-        color:white
-    }
-</style>
-<body style="background-color:black">
 
-    <nav class="navbar" style="background-color:#00a65a">
-        <a class="navbar-brand">My Book recommender</a>
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #2575fc;
+        }
+
+        .navbar-brand, .navbar-nav a {
+            color: white !important;
+        }
+
+        .navbar-nav a:hover {
+            color: #ddd !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .card {
+            background-color: #1e2a47;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h4 {
+            margin-bottom: 5px;
+        }
+
+        .card-body p {
+            font-size: 16px;
+            font-weight: normal;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+
+        .card-body h4 {
+            color: #ffb600;
+            font-size: 18px;
+        }
+
+        .col-md-3 {
+            margin-top: 30px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        @media (max-width: 768px) {
+            .col-md-3 {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Navbar styles */
+        .navbar {
+            border-radius: 0;
+            padding: 10px 20px;
+        }
+
+        .navbar-nav {
+            font-size: 18px;
+        }
+
+        .navbar-nav li a {
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">My Book Recommender</a>
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/recommend">Recommend</a></li>
-            <li><a>Contact</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
 
+    <!-- Main Content -->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-white" style="font-size:50px">Recommend Books</h1>
+                <h1>Recommend Books</h1>
                 <form action="/recommend_books" method="post">
                     <input name="user_input" type="text" class="form-control"><br>
                     <input type="submit" class="btn btn-lg btn-warning">
                 </form>
             </div>
 
+            <!-- Display Books -->
             {% if data %}
-
-             {% for i in data %}
-                <div class="col-md-3" style="margin-top:50px">
+                {% for i in data %}
+                <div class="col-md-3">
                     <div class="card">
+                        <img class="card-img-top" src="{{ i[2] }}" alt="Book image">
                         <div class="card-body">
-                            <img class="card-img-top" src="{{i[2]}}">
-                            <p class="text-white">{{i[0]}}</p>
-                            <h4 class="text-white">{{i[1]}}</h4>
+                            <p>{{ i[0] }}</p>
+                            <h4>{{ i[1] }}</h4>
                         </div>
                     </div>
                 </div>
-             {% endfor %}
-
+                {% endfor %}
             {% endif %}
-
-
-
 
         </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyVmM7D5l3vjqfAxk1oaVmz6X2y7N7B5a2J06z5h" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0zv8+4uP1j24QVSXePHExsMlFhR8hIs3Fz0IhZyD3z5vJlqj" crossorigin="anonymous"></script>
 
 </body>
 </html>
